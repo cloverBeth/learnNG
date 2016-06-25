@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta  http-equiv="X-UA-Compatible" content="IE=edge" />
+        <script src="index.js"></script>
+        <link rel="stylesheet" href="index.css" />
+    </head>
+    <body>
+
+<div class="suggest" ></div>
+
+
+    <div id="showtime"></div>
+    <p>距离高考还有 <span id="senior"></span>天</p>
+
+    <marquee onmouseover='this.stop();' onmouseout='this.start();' direction="up" loop=-1 behavior='scroll' height="99%" scrolldelay='10' scrollamount='1' >
+        <p><a href="#">hello</a></p>
+        <p><a href="#">nice to meet you</a></p>
+        <p><a href="#">how are you</a></p>
+        <p><a href="#">i'm fine</a></p>
+        <p><a href="#">thank you</a></p>
+
+    </marquee>
+
+        <div  id="mooc"> 
+
+            <div  id="moocBox">
+                <ul>
+                    <li><a href="#">1.学会html5 绝对的屌丝逆袭（案例）</a><span>2013-09-18</span></li>
+                    <li><a href="#">2.tab页面切换效果（案例）</a><span>2013-10-09</span></li>
+                    <li><a href="#">3.圆角水晶按钮制作（案例）</a><span>2013-10-21</span></li>
+                    <li><a href="#">4.HTML+CSS基础课程(系列)</a><span>2013-11-01</span></li>
+                    <li><a href="#">5.分页页码制作（案例）</a><span>2013-11-06</span></li>
+                    <li><a href="#">6.导航条菜单的制作（案例）</a><span>2013-11-08</span></li>
+                    <li><a href="#">7.信息列表制作(案例)</a><span>2013-11-15</span></li>
+                    <li><a href="#">8.下拉菜单制作(案例)</a><span>2013-11-22</span></li>
+                    <li><a href="#">9.如何实现“新手引导”效果</a><span>2013-12-06</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <script>
+
+     var area = document.getElementById('moocBox');
+     var iliHeight = 24;//单行滚动的高度
+     var speed = 50;//滚动的速度
+     var time;
+     var delay= 2000;
+     area.scrollTop= 0 ;
+     area.innerHTML+=area.innerHTML;//克隆一份一样的内容
+     function startScroll(){
+         time=setInterval("scrollUp()",speed);
+         area.scrollTop++;
+         }
+     function scrollUp(){
+         if(area.scrollTop % iliHeight==0){
+             clearInterval(time);
+             setTimeout(startScroll,delay);
+             }else{
+                 area.scrollTop++;
+                 if(area.scrollTop >= area.scrollHeight/2){
+                     area.scrollTop =0;
+                     }
+                 }
+         }
+     setTimeout(startScroll,delay);</script>
+    </body>
+</html>
