@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ecmascript</title>
+  	<script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+
+</head>
+<body>
+
+
+<input type="text" id="userName" name="userName" /><br /><br />
+<input type="text" id="userAge" name="userAge" /><br /><br />
+<input type="text" id="day" name="day"><br /><br />
+<input type="text" id="hour" name='hour'><br /><br />
+
+
+
+
+
+
+
+<div>
+	
+
+	<select name="province" id="province" onChange="setCity()" >
+		<option value="">--请选择--</option>
+	</select>
+	<select name="city" id="city">
+		<option value="">--请选择--</option>
+	</select>
+</div>
+
+
+
+<script type="text/javascript">
+	//数组遍历
+	var arrs=['A','B','C'];
+
+	arrs[3]='123';
+	for(i=0;i<arrs.length;i++){
+		console.log(arrs[i]);
+	}
+	for (temp in arrs){
+		console.log('下标：'+temp+'值：'+arrs[temp]);
+	}
+
+	//省市区联动
+	// var pro=new Array();
+	// pro['广东省']=['广东','深圳','珠海'];
+	// pro['湖北省']=['武汉','襄樊','赤壁'];
+	// console.log(JSON.stringify(pro));
+	
+
+	// var proSel=document.getElementById("province");
+	// for(temp in pro){
+	// 	proSel.add(new Option(temp,temp));
+	// }
+	// function setCity(){
+	// 	var prname=document.getElementById("province").value;
+	// 	var citySel=document.getElementById("city");
+	// 	citySel.options.length=1;
+	// 	if(prname=="")return;
+	// 	for (var i=0;i<prname.length;i++){
+	// 		citySel.add(new Option(pro[prname][i],pro[prname][i]));//
+
+	// 	}
+	// }
+var proJSON={'1':'广东省','2':'湖北省'};
+var cityJSON={'1':{'020':'广州','0755':'深圳','0756':'珠海'},'2':{'027':'武汉','0710':'襄樊','0715':'赤壁'}};
+var province=document.getElementById("province");
+for(temp in proJSON){
+	province.add(new Option(proJSON[temp],temp));
+}
+
+function setCity(){
+	var city=document.getElementById("city");
+	city.options.length=1;
+	var val=document.getElementById("province").value;
+
+	if(!cityJSON[val]){
+		return;
+	}
+	var sonJOSN=cityJSON[val];
+	for(temp in sonJOSN){
+		city.add(new Option(sonJOSN[temp],temp));
+	}
+
+}
+
+
+
+
+	//字符串分割
+		var array;
+		function getString(str){
+		 array = str.split(" ");
+		 array2 = array[0].split('-');
+		 document.getElementById("userName").value = array[0];
+		 document.getElementById("userAge").value = array[1];
+		 document.getElementById("day").value = array2[0];
+		 document.getElementById("hour").value = array2[1];
+		}
+
+		getString('2016-08-24 15:28:36');
+	
+	//字符串分割
+  var speed=12;
+  var level=0||{'5':1,'10':2,'12':3,'15':5}[speed];
+  console.info(level);
+
+</script>
+</body>
+</html>

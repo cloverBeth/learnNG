@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js demo</title>
+</head>
+<body>
+
+<input type="file" id="test-image-file">
+<div id="test-file-info"></div>
+<div id="test-image-preview" style="width:500px;height:400px;background-size:100% 100%;background-repeat: no-repeat;"></div>
+
+
+<!-- HTML -->
+<form id="login-form" method="post" onsubmit="return checkForm()">
+    <input type="text" id="username" name="username">
+    <input type="password" id="input-password">
+    <input type="hidden" id="md5-password" name="password">
+    <button type="submit">Submit</button>
+</form>
+
+	<script>
+	function checkForm() {
+	    var input_pwd = document.getElementById('input-password');
+	    var md5_pwd = document.getElementById('md5-pas+0sword');
+	    // 把用户输入的明文变为MD5:
+	    md5_pwd.value = hex_md5(input_pwd.value);
+	    // 继续下一步:
+	    console.log(md5_pwd.value);
+	    return true;
+	}
+	</script>
+	<script>
+		"use strict";
+
+		var
+		    fileInput = document.getElementById('test-image-file'),
+		    info = document.getElementById('test-file-info'),
+		    preview = document.getElementById('test-image-preview');
+		// 监听change事件:
+		fileInput.addEventListener('change', function () {
+		    // 清除背景图片:
+		    preview.style.backgroundImage = '';
+		    // 检查文件是否选择:
+		    if (!fileInput.value) {
+		        info.innerHTML = '没有选择文件';
+		        return;
+		    }
+		    // 获取File引用:
+		    var file = fileInput.files[0];
+		    // 获取File信息:
+		    info.innerHTML = '文件: ' + file.name + '<br>' +
+		                     '大小: ' + file.size + '<br>' +
+		                     '修改: ' + file.lastModifiedDate;
+		    if (file.type !== 'image/jpeg' && file.type !== 'image/png' && file.type !== 'image/gif') {
+		        alert('不是有效的图片文件!');
+		        return;
+		    }
+		    // 读取文件:
+		    var reader = new FileReader();
+		    reader.onload = function(e) {
+		        var
+		            data = e.target.result; // 'data:image/jpeg;base64,/9j/4AAQSk...(base64编码)...'            
+		        preview.style.backgroundImage = 'url(' + data + ')';
+		    };
+		    // 以DataURL的形式读取文件:
+		    reader.readAsDataURL(file);
+		});
+
+
+		// var xiaoming={
+		// 	name:'小明',
+		// 	age:'22',
+		// 	job:'web projector'
+		// }
+
+		// xiaoming.phone='1982980398';
+		// xiaoming.QQ='283790923';
+		// delete xiaoming.job;
+		// console.log(xiaoming);
+		// xiaoming.hasOwnProperty('grade')?alert('xiaoming对象中存在grade属性'):alert('xiaoming对象中不存在grade属性');
+
+		// var height=parseFloat(prompt('请输入身高(m)'));
+		// var weight=parseFloat(prompt('请输入体重(kg)'));
+		// var bmi=weight/(height*height);
+		// if(bmi<18.5){
+		// 	console.log('您太瘦啦');
+		// }else if(bmi>18.5&&bmi<25){
+		// 	console.log('您的体重正常，继续保持');
+		// }else if(bmi>28&&bmi<32){
+		// 	console.log('您有点胖哦');
+		// }else if(bmi>32){
+		// 	console.log('您太胖了，该减肥啊');
+		// }else{
+		// 	console.log('wrong');
+		// }
+
+
+		var arr = ['Bart', 'Lisa', 'Adam'];
+		//倒序
+				var i=arr.length;
+
+				do{
+				  i=i-1;
+				  console.log('hello,'+arr[i]);
+
+				}while(i>0);
+
+				//正序
+				var n=0;
+				do{
+				console.log('hello,'+arr[n]);
+				    n++;
+				}while(n<arr.length);
+
+				//for正序
+				for(var temp in arr){
+					console.log('hello,'+arr[temp]);
+				}
+				//for倒序
+
+				for(var k=arr.length-1;k>=0;k--){
+					console.log('hello,'+arr[k]);
+				}
+
+
+
+		var count = 0;
+		var oldParseInt = parseInt; // 保存原函数
+
+		window.parseInt = function () {
+		    count += 1;
+		    return oldParseInt.apply(null, arguments); // 调用原函数
+		};
+
+
+
+		function fib(max){
+			var 
+			t,
+			a=0,
+			b=1,
+			arr=[0,1];
+			while(arr.length<max){
+				t=a+b;
+				a=b;
+				b=t;
+				arr.push(t);
+			}
+			console.log(arr);
+		}
+		fib(8);
+	
+</script>
+</body>
+</html>

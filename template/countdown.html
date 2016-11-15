@@ -1,0 +1,59 @@
+<html>
+<head>
+  <title></title>
+  <meta charset="UTF-8">
+  <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+   
+     <input type="hidden"  class="time_val" for="{$b.date}" value="2016-06-24 09:14:41" />
+      <div class="time" id="time_show_{$b.date}"></div>
+</body>
+</html>
+<script type="text/javascript">
+setInterval("time_controller()",1000);
+
+
+function time_controller(){
+
+    $(".time_val").each(function(){
+         var time_id = "time_show_"+$(this).attr('for');
+         var time_val=parseInt(new Date( $(this).attr('value')).getTime());//timestamp
+         // var time_val=$(this).attr('value');
+
+        var endtime=parseInt((time_val+86400000))-parseInt(new Date().getTime());//相差多少时间
+        
+show_time(time_id,endtime)
+ 
+
+    });
+}
+function show_time(id,timestamp)
+{
+    var timer = document.getElementById(id);
+    var str_time,int_day,int_hour,int_minute,int_second;
+    var time_distance = timestamp;
+     // console.log(time_distance);
+    if(time_distance>0)
+    {
+          int_day=Math.floor(time_distance/86400000)//day
+          time_distance-=int_day*86400000;
+          int_hour=Math.floor(time_distance/3600000)
+          time_distance-=int_hour*3600000;
+          int_minute=Math.floor(time_distance/60000)
+          time_distance-=int_minute*60000;
+          int_second=Math.floor(time_distance/1000)
+
+          if(int_hour<10)
+           int_hour="0"+int_hour;
+          if(int_minute<10)
+           int_minute="0"+int_minute;
+          if(int_second<10)
+           int_second="0"+int_second;
+          str_time="<b>剩余时间："+int_day+"天"+int_hour+"小时"+int_minute+"分钟"+int_second+"秒</b>";
+          timer.innerHTML=str_time;
+    }else{
+          timer.innerHTML="<b>截止时间到</b>";
+    }
+}
+</script>

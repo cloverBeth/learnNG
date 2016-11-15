@@ -1,0 +1,31 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'F:\\hnzdownload\\node.exe',
+1 verbose cli   'F:\\hnzdownload\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   '--save-dev',
+1 verbose cli   'gulp' ]
+2 info using npm@2.15.5
+3 info using node@v4.4.5
+4 verbose config Skipping project config: C:\Users\Beth Sheldon/.npmrc. (matches userconfig)
+5 verbose stack Error: Cannot find module 'concat-map'
+5 verbose stack     at Function.Module._resolveFilename (module.js:325:15)
+5 verbose stack     at Function.Module._load (module.js:276:25)
+5 verbose stack     at Module.require (module.js:353:17)
+5 verbose stack     at require (internal/module.js:12:17)
+5 verbose stack     at Object.<anonymous> (F:\hnzdownload\node_modules\npm\node_modules\fstream-npm\node_modules\fstream-ignore\node_modules\minimatch\node_modules\brace-expansion\index.js:1:79)
+5 verbose stack     at Module._compile (module.js:409:26)
+5 verbose stack     at Object.Module._extensions..js (module.js:416:10)
+5 verbose stack     at Module.load (module.js:343:32)
+5 verbose stack     at Function.Module._load (module.js:300:12)
+5 verbose stack     at Module.require (module.js:353:17)
+5 verbose stack     at require (internal/module.js:12:17)
+6 verbose cwd C:\Users\Beth Sheldon\Documents\GitHub\learnNG
+7 error Windows_NT 10.0.14393
+8 error argv "F:\\hnzdownload\\node.exe" "F:\\hnzdownload\\node_modules\\npm\\bin\\npm-cli.js" "install" "--save-dev" "gulp"
+9 error node v4.4.5
+10 error npm  v2.15.5
+11 error code MODULE_NOT_FOUND
+12 error Cannot find module 'concat-map'
+13 error If you need help, you may report this error at:
+13 error     <https://github.com/npm/npm/issues>
+14 verbose exit [ 1, true ]

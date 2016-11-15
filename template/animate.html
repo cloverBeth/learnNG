@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>js弹框3秒后自动消失</title>
+        <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/css" href="../Public/bootstrap-3.3.5-dist/js/bootstrap.js"></script>>
+
+        <link rel="stylesheet" type="text/css" href="../Public/bootstrap-3.3.5-dist/css/bootstrap.css"/>
+        <style>
+            /*弹框本身(大)*/ 
+.my-modal-alert .boxBodyBig{
+    width:496px;
+    height: 418px;
+}
+/*弹框本身(小)*/ 
+.my-modal-alert .boxBodySmall{
+    width:412px;
+    height: 418px;
+}
+/*弹框头*/
+.my-modal-alert .boxHeader{
+    background-color: #f6f6f6;
+    border-bottom: #e5e5e5 1px;
+    height: 48px;
+} 
+/*弹框标题*/ 
+.my-modal-alert .boxTitle{
+    background-color: #f6f6f6;
+    color:#333333;
+    font-family:"SimHei";
+    font-size: 16px;
+}
+/*弹框头部分右侧关闭按钮*/
+.my-modal-alert .boxClose{
+    
+}
+.my-modal-alert .boxClose:hover{
+    color: #ff7800;
+}
+/*弹框按钮的父级元素块*/
+.my-modal-alert .boxFooter{
+    margin: auto;
+    text-align: center;
+    padding:24px 15px 24px 15px;
+    margin:0px 15px 0px 15px;
+}
+/*弹框按钮*/
+.my-modal-alert .boxButton{
+    font-family:"SimHei";
+    background-color:#ff7800;
+    width: 70px;
+    height: 30px;
+    color:white;
+    text-align:center;
+    line-height: 1;
+}
+
+/*已下为选用*/
+/*弹框主题label框*/
+.my-modal-alert .boxLabel{
+    width:80px;
+    font-size: 14px; 
+    font-family:'SimHei';
+    color: #999999;
+    
+}
+/*文本框*/
+.my-modal-alert .boxInput{
+    width:176px;
+    font-size: 14px;
+    color: #333333;
+}
+/*纯文本*/
+.my-modal-alert .boxText{
+    color:#ff7800;
+    font-family:'SimHei';
+    font-size: 12px;
+}
+.my-modal-alert .boxTextarea{
+    font-size: 12px;
+}
+
+.my-modal-alert .modal-body{
+    width: 400px;
+    height: 100px;
+    text-align: center;
+}
+.my-modal-alert .modal_message{
+    margin-top: 20px;
+    
+}
+        </style>          
+    </head>
+    <body>
+        <button onclick="showModal()">点击弹出模态框</button>
+        
+        <div class='modal my-modal-alert' id='my-modal-alert'>
+            <div class='modal-dialog boxBodySmall'>
+                <div class='modal-content'>
+                    <div class='modal-header boxHeader'>
+                        <button type='button' class='close boxClose' data-dismiss='modal'>
+                            <span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span>
+                        </button>
+                        <h4 class='modal-title boxTitle' id='modal-title'>模态框</h4>
+                    </div>
+                    <div class='modal-body' id='modal-body-alert'>
+                        <div id='modal_message'>js弹框自动消失案例</div>
+                        <span id='num'></span>
+                    </div>
+                    <div class='modal-footer boxFooter' id='modal-footer'>
+                        <button type='button' class='btn btn-default boxButton' data-dismiss='modal'>关闭</button>
+                        <button type='button' class='btn btn-primary boxButton'>保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script src="./js/jquery/jquery-1.11.2.js"></script>
+        <script src="./js/bootstrap/js/bootstrap.min.js"></script>
+        <script src="./js/jquery-ui/jquery-ui.min.js"></script>
+        
+        <script>
+            var clearFlag = 0;
+            var count = 3;//设置3秒后自动消失
+            var showModal = function(){
+                $("#my-modal-alert").toggle();//显示模态框
+                
+                $("#my-modal-alert").draggable({//设置模态框可拖动（需要引入jquery-ui.min.js）
+                    handle: ".modal-header"
+                });
+                
+                clearFlag = self.setInterval("autoClose()",1000);//每过一秒调用一次autoClose方法
+            }
+            
+            var autoClose = function(){
+                if(count>0){
+                    $("#num").html(count + "秒后窗口将自动关闭");
+                    count--;
+                }else if(count<=0){
+                    window.clearInterval(clearFlag); 
+                    $("#num").html("");
+                    $("#my-modal-alert").fadeOut("slow");
+                    count = 3;
+                    $("#my-modal-alert").toggle();
+                }
+            }
+        </script>
+    </body>
+</html>

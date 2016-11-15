@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="bootstrap-3.3.5-dist/css/bootstrap.min.css">
+	<script src="jquery/jquery-3.1.0.min.js"></script>
+	<script src="angular/angular.min.js"> </script>
+	<script src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+	<title>ng</title>
+</head>
+<body>
+
+		<div ng-controller="AlbumCtrl">
+			<ul>
+				<li ng-repeat="image in images track by $index">
+					<img ng-src="{{image.thumbnail}}" alt="{{image.description}}">
+				</li>
+			</ul>
+		</div>
+		<script>
+			var myapp=angular.module('myApp', []);
+
+			  myapp.controller('AlbumCtrl',function($scope){
+			  	$scope.images=[
+				  	{"thumbnail":"img/100544571390f934c5.jpg","description":"001 des"},
+				  	{"thumbnail":"img/11184290668699d774m.jpg","description":"002 des"},
+				  	{"thumbnail":"img/112924101094a4528em.jpg","description":"003 des"},
+				  	{"thumbnail":"img/11358517252e824953m.jpg","description":"004 des"}
+			  	];
+
+		  		myapp.directive('userInfo',function(){
+		  			return{
+		  				restrict:'E',
+		  				templateUrl:'userInfoTemplate.html',
+		  				replace:true,
+		  				transclude:true,
+		  				scope:{
+		  					mytitle:'=etitle'
+		  				},
+		  				link:function($scope,element,attris){
+		  					scope.showText=false;
+		  					scope.toggleText=function(){
+		  						scope.showText=!scope.showText;
+		  					}
+
+		  				}
+		  			}
+		  		})
+
+			  })
+		</script>
+
+		<script type="text/ng-template" id="userInfoTemplate.html">
+			<div class="mybox">
+				<div class="mytitle" style="cursor: pointer;" ng-click="toggleText()">
+					{{mytitle}}
+				</div>
+				<div ng-transclude ng-show="showText"></div>
+			</div>
+		</script>
+</body>
+</html>
