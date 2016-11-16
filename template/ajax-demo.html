@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ajax</title>
+	<script src="../public/jquery/jquery-3.1.0.min.js"></script>
+</head>
+<body>
+
+	<form action="">
+		<input type="text" name="user">
+		<input type="text" name="email">
+		<input type="radio" name="sex" value="男" />男
+		<input type="radio" name="sex" value="女" />女
+		<input type="button" value="提交">
+	</form>
+
+
+	<div class="loading">
+		<font color="#ff0000" size="3">加载中...</font>	
+	</div>
+	<!-- <input type="button" value="异步加载数据"> -->
+	<div id="box"></div>
+
+	<script>
+
+		$(function(){
+
+			/*简单地请求数据*/
+				// $("input[type='button']").click(function(){
+				// 	$("#box").load('../api/users.txt');
+				// });
+
+				/*php数据请求*/
+				$("input[type='button']").click(function(){
+					// $("#box").load('../api/test.php',{
+					// 	url:'testdata'
+					// },function(response,status,xhr){
+					// 	$('#box').html(response+'222222');
+					// 	if(status=='success'){
+					// 		console.log(response);
+					// 	}
+
+					// 	console.log('xhr.responseText:'+ xhr.responseText);
+
+
+					// });
+
+					// $.post('../api/test.php','url=testdata',function(response,status,xhr){
+					// 	$("#box").html(response);
+					// });
+
+
+					/*getJSON*/
+					// $.getJSON('../api/categories.json',function(response,status,xhr){
+					// 	$("#box").html(response.categories[0].id);
+					// });
+
+					/*ajax*/
+					// $.ajax({
+					// 	type:'POST',
+					// 	url:'../api/test.php',
+					// 	data:{
+					// 		url:'testdata'
+					// 	},
+					// 	success:function(response,status,xhr){
+					// 		$("#box").html(response);
+					// 	}
+					// });
+
+				});
+
+				$("form input[type=button]").click(function(){
+					// $.ajax({
+					// 	type:"POST",
+					// 	url:'../api/user.php',
+					// 	data:{
+					// 		user:$('form input[name=user]').val(),
+					// 		email:$('form input[name=email]').val(),
+					//
+
+
+				});
+
+
+				/*单选按钮*/
+				$("form input[name=sex]").click(function(){
+					// $("#box").html(decodeURIComponent($(this).serialize()));
+					var json=$(this).serializeArray();
+					$('#box').html(json[0].name+'='+json[0].value);
+				});
+
+				$("form input[type=button]").click(function(){
+					// $.ajax({
+					// 	type:"POST",
+					// 	url:'../api/user.php',
+					// 	data:$('form').serialize(),
+					// 	success:function(response,status,xhr){
+					// 		$('#box').html(response);
+					// 	},
+					// 	timeout:2000,
+						// error:function(xhr,errorText,errorType){
+						// 	alert(errorText+":"+errorType);
+						// 	// alert(xhr.status+':'+xhr.statusText);
+						// }
+						// global:false
+
+					// });
+				});
+				
+				$(document).ajaxStart(function(){
+					$('.loading').show();
+				}).ajaxStop(function(){
+					$('.loading').hide();
+				});
+
+				// $(document).ajaxSend(function(){
+				// 	alert('请求之前执行');
+				// }).ajaxComplete(function(){
+				// 	alert('请求完成后不管是失败或者成功');
+				// }).ajaxSuccess(function(){
+				// 	alert('请求成功后');
+				// }).ajaxError(function(){
+				// 	alert('请求失败后');
+				// });
+
+				$("form input[type=button]").click(function(){
+					// 本地获取jsonp.php文件
+					$.ajax({
+						
+						type:'POST',
+						url:'../api/jsonp.php?callback=?',
+						dataType:'json',
+						success:function(response,status,xhr){
+							alert(response.a);
+						}
+
+					});
+				});
+				
+
+
+			});
+		</script>
+	</body>
+	</html>
