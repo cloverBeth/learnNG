@@ -12,6 +12,7 @@
 
 
 	<div ng-controller="AlbumCtrl">
+
 		<ul class="clearfix">
 			<li ng-repeat="image in images track by $index" class="pull-left">
 				<img ng-src="{{image.thumbnail}}" alt="{{image.description}}"></li>
@@ -71,12 +72,22 @@
 		<input type="text" ng-model="num1">
 		<input type="text" ng-model="num2">
 		<div>结果是：{{parseInt(num1)+parseInt(num2)}}</div>
+
+
+		<ul ng-init="json={a:'abs',b:'egsg',c:5645}">
+			<li ng-repeat="(key,value) in json">#{{key}}={{value}}</li>
+		</ul>
+
 	</div>
 
 	
 
 	<h3>{{'ginger loves dog treats' | lowercase | capitalize}}</h3>
 	
+
+
+
+
 
 	<script>
 		var myapp=angular.module('myApp', []);
