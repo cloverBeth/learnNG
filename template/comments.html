@@ -16,7 +16,8 @@
 			<form action="">
 				<div class="form-group">
 					<textarea name="" id="" cols="30" rows="10" placeholder="快来评论吧~" class="form-control"></textarea>
-					<input type="button" value="提交" class="btn btn-success">
+					<input type="button" value="提交" class="btn btn-success"
+					 ng-click="submitMsg()">
 				</div>
 			</form>
 
@@ -25,6 +26,13 @@
 		
 
 		<div class="col-sm-12 text-center" ng-show='replies.length==0'>暂无留言</div>
+		<nav>
+		  <ul class="pagination">
+		    <li><a href="#">&laquo;</a></li>
+		    <li><a href="#" ng-repeat="i in pages" ng-click="getPage(i)">{{i}}</a></li>
+		    <li><a href="#">&raquo;</a></li>
+		  </ul>
+		</nav>
 		<h4 class="row text-center" ng-hide='replies.length==0'>留言内容</h4>	
 		<div class="row" ng-repeat="reply in replies">
 			<div class="col-sm-12 content">{{reply.content}}</div>
@@ -49,6 +57,8 @@
 		var app=angular.module('comment',[]);
 	
 		app.controller('commentCtrl',function($scope,$http){
+				
+				$scope.replies=[];
 				// $scope.replies=[{
 				// 	id:001,
 				// 	content:'古月哥我hi故意翻译',
@@ -63,22 +73,22 @@
 				// 	ref:7
 				// }];
 
-				$scope.replies=[];
-
-			});
-
+			//获取显示留言 
+		function getPage(p){
+			alert(p);
 			$http.get('../api/comment.php',{
-					params:{act:'get',page:1}
+					params:{act:'get',page:p}
 				}).success(function(arr){
 					$scope.replies=arr;
 				}).error(function(){
 					alert('读取失败，请稍后再试');
 				});
+			}
+		$scope.getPage=getPage;
 
-		}]);
+		// 提交留言函数
+		$scope.submitMsg=function(){
 
-		提交留言函数
-		$scope.submitMsg=fucntion(){
 			$http.get('../api/comment.php',{
 				params:{act:'add',cotent:$scope.inputTxt}
 			}).success(function(res){
@@ -92,8 +102,18 @@
 				if($scope.replies.length>6){
 					$scope.replies.pop();
 				}
+				$scope.inputText='';
+			}).error(function(){
+				alert('提交失败');
 			});
-		}
+		};
+
+
+		// 页码
+		$scope.pages=[1,2,3];
+
+
+	});
 	</script>
 </body>
 </html>
