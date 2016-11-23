@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="beth">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0" >
+	<link rel="stylesheet" href="../public/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+	<script src="../public/jquery/jquery-3.1.0.min.js"></script>
+	<script src="../public/angular/angular.min.js"></script>
+	<script src="../public/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+	<title>ngdemo2</title>
+</head>
+<body ng-cloak ng-controller="bethCtrl">
+	
+	<div>{{alert}}</div>
+
+
+
+	<script>
+		var app=angular.module('beth',[]);
+		app.controller('bethCtrl',['$scope','$http',function($scope,$http){
+			// $scope.alert='alertllllll';
+			// alert($scope.alert);
+			$http.get('../api/a.php',{
+				params:{a:12,b:5},
+				reponseType:'json'
+			}).success(function(res){
+					alert(res+5);
+			}).error(function(){
+				alert('failed');
+			});
+
+		}]);
+	</script>
+</body>
+</html>

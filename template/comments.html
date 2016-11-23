@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='comment'>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0" >
+	<link rel="stylesheet" href="../public/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+	<script src="../public/jquery/jquery-3.1.0.min.js"></script>
+	<script src="../public/angular/angular.min.js"></script>
+	<script src="../public/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+	<title>comments</title>
+</head>
+<body ng-cloak ng-controller='commentCtrl'>
+
+	<div class="container">
+		<div class="row">
+			<form action="">
+				<div class="form-group">
+					<textarea name="" id="" cols="30" rows="10" placeholder="快来评论吧~" class="form-control"></textarea>
+					<input type="button" value="提交" class="btn btn-success">
+				</div>
+			</form>
+
+			
+		</div>
+		
+
+		<div class="col-sm-12 text-center" ng-show='replies.length==0'>暂无留言</div>
+		<h4 class="row text-center" ng-hide='replies.length==0'>留言内容</h4>	
+		<div class="row" ng-repeat="reply in replies">
+			<div class="col-sm-12 content">{{reply.content}}</div>
+		
+			<div class="col-sm-4 text-center pull-left">{{reply.time|date:"yyyy-MM-dd HH:mm:ss"}}</div>
+			<div class="col-sm-8 text-center pull-right">
+				<span class="glyphicon glyphicon-thumbs-up">{{reply.acc}}</span>
+				<span class="glyphicon glyphicon-thumbs-down">{{reply.ref}}</span>
+			</div>
+		</div>
+
+	
+		
+	</div>
+
+
+
+
+
+
+	<script>
+		var app=angular.module('comment',[]);
+	
+		app.controller('commentCtrl',function($scope,$http){
+				// $scope.replies=[{
+				// 	id:001,
+				// 	content:'古月哥我hi故意翻译',
+				// 	time:1479454908639,
+				// 	acc:1,
+				// 	ref:2
+				// },{
+				// 	id:002,
+				// 	content:'几乎隔几天然后一边',
+				// 	time:1479454908639,
+				// 	acc:5,
+				// 	ref:7
+				// }];
+
+				$scope.replies=[];
+
+			});
+
+			$http.get('../api/comment.php',{
+					params:{act:'get',page:1}
+				}).success(function(arr){
+					$scope.replies=arr;
+				}).error(function(){
+					alert('读取失败，请稍后再试');
+				});
+
+		}]);
+
+		提交留言函数
+		$scope.submitMsg=fucntion(){
+			$http.get('../api/comment.php',{
+				params:{act:'add',cotent:$scope.inputTxt}
+			}).success(function(res){
+				$scope.replies.unshift({
+					id: res.id,
+					content: $scope.inputTxt,
+					time: res.time,
+					acc: 0,
+					ref: 0
+				});
+				if($scope.replies.length>6){
+					$scope.replies.pop();
+				}
+			});
+		}
+	</script>
+</body>
+</html>
