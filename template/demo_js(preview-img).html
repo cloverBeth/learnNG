@@ -3,12 +3,49 @@
 <head>
 	<meta charset="UTF-8">
 	<title>js demo</title>
+	<style>
+	.file {
+    position: relative;
+    display: inline-block;
+    background: #9d9d9e;
+    padding: 4px 12px;
+    overflow: hidden;
+    color: #fff;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 20px;
+}
+.file input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+}
+
+
+#test-image-preview{
+  width:100%;
+  height:auto;
+  min-height:150px!important;
+  background-size:100% 100%;
+  background-repeat: no-repeat;
+  /* padding: 50px 0 50px 0; */
+  margin: 10px 0;
+}
+
+	</style>
 </head>
 <body>
 
-<input type="file" id="test-image-file">
+<a href="#" class="file">
+	<div class="glyphicon glyphicon-plus">选择图片</div>
+	<input type="file" id="test-image-file" name="pic">
+</a>
+	<input type="file" id="test-image-file">
+</a>
 <div id="test-file-info"></div>
-<div id="test-image-preview" style="width:500px;height:400px;background-size:100% 100%;background-repeat: no-repeat;"></div>
+<div id="test-image-preview"></div>
 
 
 <!-- HTML -->

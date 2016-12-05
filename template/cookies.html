@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0" >
+	<link rel="stylesheet" href="../public/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+	<script src="../public/jquery/jquery-3.1.0.min.js"></script>
+	<script src="../public/angular/angular.min.js"></script>
+	<script src="../public/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+	<title>cookies</title>
+</head>
+<body>
+	
+	<script>
+		// var oDate=new Date();
+		// oDate.setDate(oDate.getDate()+14);
+	
+		// // cookie过期时间
+		// document.cookie='user=blue;expires='+oDate;
+
+
+		// alert(document.cookie);
+
+		//cookie 封装函数
+		function setCookie(name,value,iDay){
+			var oDate=new Date();
+
+			oDate.setDate(iDay);
+			document.cookie=name+'='+value+';expires='+oDate;
+		}
+
+		setCookie('name','beth','365');
+		setCookie('pwd','123456','14');
+		var d = new Date();
+		d.setDate(18);
+		alert(d);
+
+		var {a,b}={a:'aaa',b:'bbbbb'};
+		var [d,{e,f}]=['ddddd',{e:'eeeee',f:'fffff'}];
+		alert(a+'\n'+b+'\n'+d+'\n'+e+'\n'+f);
+	</script>
+
+
+<script type="text/javascript">
+
+var d = new Date()
+d.setDate(18)
+document.write(d)
+
+</script>
+
+</body>
+</html>

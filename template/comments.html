@@ -39,8 +39,8 @@
 		
 			<div class="col-sm-4 text-center pull-left">{{reply.time|date:"yyyy-MM-dd HH:mm:ss"}}</div>
 			<div class="col-sm-8 text-center pull-right">
-				<span class="glyphicon glyphicon-thumbs-up">{{reply.acc}}</span>
-				<span class="glyphicon glyphicon-thumbs-down">{{reply.ref}}</span>
+				<span class="glyphicon glyphicon-thumbs-up" ng-click="fnAcc(reply.id)">{{reply.acc}}</span>
+				<span class="glyphicon glyphicon-thumbs-down" ng-click="fnRef(reply.id)">{{reply.ref}}</span>
 			</div>
 		</div>
 
@@ -58,22 +58,10 @@
 	
 		app.controller('commentCtrl',function($scope,$http){
 				
-				$scope.replies=[];
-				// $scope.replies=[{
-				// 	id:001,
-				// 	content:'古月哥我hi故意翻译',
-				// 	time:1479454908639,
-				// 	acc:1,
-				// 	ref:2
-				// },{
-				// 	id:002,
-				// 	content:'几乎隔几天然后一边',
-				// 	time:1479454908639,
-				// 	acc:5,
-				// 	ref:7
-				// }];
+				// $scope.replies=[];
+				$scope.replies=[{id:11,content:'古月哥我hi故意翻译',time:1479454908639,acc:1,ref:2},{id:12,content:'几乎隔几天然后一边',time:1479454908639,acc:5,ref:7}];
 
-			//获取显示留言 
+			//获取，显示留言 
 		function getPage(p){
 			alert(p);
 			$http.get('../api/comment.php',{
@@ -84,7 +72,28 @@
 					alert('读取失败，请稍后再试');
 				});
 			}
+
 		$scope.getPage=getPage;
+
+		// 页码
+		// $scope.pages=[{num:1,className:''},{num:2,className:'active'},{num:3,className:''}];
+		$scope.pages=[];
+		$scope.curPage=1;
+		$http.get('../api/comment.php',{
+			params:{act:'get_page_count'}
+		}).success(function(data){
+			for(var i=1;i<data.count;i++){
+				if(i==$scope.curPage){
+					$scope.pages.push({num:i,className:'active'});
+				}else{
+					$scope.pages.push({num:i,className:''});
+				}
+			}
+		}).error(function(){
+			alert('error');
+		})
+
+
 
 		// 提交留言函数
 		$scope.submitMsg=function(){
@@ -108,10 +117,35 @@
 			});
 		};
 
+		//顶和踩的函数
+		$scope.fnAcc=function(id){
+			$http.get('../api/comment.php',{
+				params:{acc:'acc',id:id}
+			}).success(function(){
+				for(var i=0;i<$scope.replies.length;i++){
+					if($scope.replies[i].id==id){
+						$scope.replies[i].acc++;
+					}
 
-		// 页码
-		$scope.pages=[1,2,3];
+				}
+			}).error(function(){
+				alert('错误');
+			})
+		};
+		$scope.fnRef=function(id){
+			$http.get('../api/comment.php',{
+				params:{acc:'ref',id:id}
+			}).success(function(){
+				for(var i=0;i<$scope.replies.length;i++){
+					if($scope.replies[i].id==id){
+						$scope.replies[i].ref++;
+					}
 
+				}
+			}).error(function(){
+				alert('错误');
+			})
+		};
 
 	});
 	</script>

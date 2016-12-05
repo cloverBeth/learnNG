@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	
+	<link rel="stylesheet" href="../public/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+	<script src="../public/jquery/jquery-3.1.0.min.js"></script>
+	<script src="../public/angular/angular.min.js"></script>
+	<script src="../public/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+	<title>spa</title>
+</head>
+<body ng-app="main">
+    <script type="text/javascript">
+    angular.module('main', ['ui.router'])
+    .config(['$locationProvider', '$stateProvider', function ($locationProvider, $stateProvider) {
+        $stateProvider
+        .state('home', {
+            url: '/',
+            views: {
+                'header': {
+                    templateUrl: 'ngdemo.html'
+                },
+                'content': {
+                    templateUrl: 'scroll.html'
+                }
+            }
+        });
+    }]);
+    </script>
+    <a ui-sref="home">home</a>
+    <div ui-view="header">header</div>
+    <div ui-view="content">content</div>
+    <div ui-view="bottom">footer</div>
+</body>
+</html>
