@@ -66,30 +66,29 @@
 
 	// 	}
 	// }
-var proJSON={'1':'广东省','2':'湖北省'};
-var cityJSON={'1':{'020':'广州','0755':'深圳','0756':'珠海'},'2':{'027':'武汉','0710':'襄樊','0715':'赤壁'}};
+var proJSON={'1':'广东省','2':'湖北省','3':'江西省'};
+var cityJSON={'1':{'020':'广州','0755':'深圳','0756':'珠海'},'2':{'027':'武汉','0710':'			 襄樊','0715':'赤壁'},'3':{'039':'南昌','0799':'抚州','0789':'赣州','0800':'         井冈山'}};
 var province=document.getElementById("province");
 for(temp in proJSON){
-	province.add(new Option(proJSON[temp],temp));
+	//New Option()，而且一般都是里面呆两个参数，第一个是显示的文本，第二个是value值。
+	province.add(new Option(proJSON[temp],temp)); //省级下拉框赋值
 }
 
 function setCity(){
 	var city=document.getElementById("city");
-	city.options.length=1;
-	var val=document.getElementById("province").value;
+		city.options.length=1;
+	var val=document.getElementById("province").value;//获取省级下拉框的值
 
 	if(!cityJSON[val]){
 		return;
 	}
-	var sonJOSN=cityJSON[val];
+	var sonJOSN=cityJSON[val];//'1':{'020':'广州','0755':'深圳','0756':'珠海'},'2':{'027':'武汉','0710':'			 襄樊','0715':'赤壁'},'3':{'039':'南昌','0799':'抚州','0789':'赣州','0800':'         井冈山'}
+	
 	for(temp in sonJOSN){
-		city.add(new Option(sonJOSN[temp],temp));
+		city.add(new Option(sonJOSN[temp],temp));//获取市的值
 	}
 
 }
-
-
-
 
 	//字符串分割
 		var array;
@@ -109,6 +108,8 @@ function setCity(){
   var level=0||{'5':1,'10':2,'12':3,'15':5}[speed];
   console.info(level);
 
+
+authorize('beth','do');
 </script>
 </body>
 </html>

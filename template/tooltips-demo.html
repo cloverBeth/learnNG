@@ -18,12 +18,12 @@
 <input type="button" value="跳转" id="subtn">
 	<script>
 		$('#user').tooltip();
-		confirm('是否删除')//返回值为：true 、false
-		prompt('请输入');//返回值为你输入的值
+		// confirm('是否删除')//返回值为：true 、false
+		// prompt('请输入');//返回值为你输入的值
 		window.onload=function(){
 			$('#subtn').click(function(){
 
-				var newwin=window.open('about:blank','_blank');
+				var newwin=window.open('https://www.phodal.com/blog/every-programmer-should-know-how-seo/','_blank');
 				newwin.document.write($("#txt1").val());
 			})
 
