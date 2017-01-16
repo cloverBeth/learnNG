@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0" >
+	<link rel="stylesheet" href="../public/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+
+	<script src="../public/jquery/jquery-3.1.0.min.js"></script>
+	<script src="../public/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+
+		}
+		div{
+			width: 100px;
+			height: 100px;
+			background: #abcdef;
+			position: absolute;
+		}
+	</style>
+	<title>自定义动画</title>
+</head>
+<body>
+	<input type="button" class="btn" value="点击">
+	<div></div>
+	<script>
+		$(document).ready(function(){
+			
+			$('input.btn').click(function(){
+				$('div').animate({
+					'left':'200px',
+					'top':'300px',
+					'opacity':'0.4'
+				},3000,function(){
+					$(this).css('background',"#f90");
+				})
+			});
+		})
+	</script>
+</body>
+</html>

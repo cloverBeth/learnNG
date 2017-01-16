@@ -3,9 +3,10 @@
 <head>
 	<meta charset="UTF-8">
 	<title>ajax</title>
+	<link rel="icon" href="../public/img/12750473483199.jpg">
 	<script src="../public/jquery/jquery-3.1.0.min.js"></script>
 </head>
-<body>
+<body style="height:2000px;">
 
 	<form action="">
 		<input type="text" name="user">
@@ -25,6 +26,20 @@
 	<script>
 
 		$(function(){
+
+			var $window = $(window),
+			    viewHeight = $window.height(),
+			    contentHeight = $('body').height();
+			$window.on('scroll', function() {
+				
+			    var scrollTop = $(this).scrollTop();
+			    var totalval=scrollTop + viewHeight;
+			    alert(totalval+'<br/>'+contentHeight);
+			    if (scrollTop + viewHeight>= contentHeight ){
+			        alert('contentHeight'+contentHeight+'到底了!!');
+			         //ajax请求
+			    }
+			})
 
 			/*简单地请求数据*/
 				// $("input[type='button']").click(function(){
@@ -132,7 +147,7 @@
 						url:'../api/jsonp.php?callback=?',
 						dataType:'json',
 						success:function(response,status,xhr){
-							alert(response.a);
+							console.log(response.a);
 						}
 
 					});

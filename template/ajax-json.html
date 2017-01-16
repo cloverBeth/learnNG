@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0" >
+	<link rel="stylesheet" href="../public/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+
+	<script src="../public/jquery/jquery-3.1.0.min.js"></script>
+	<script src="../public/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+	<style>
+		
+	</style>
+	</head>
+	<body>
+		<input class="btnJson" type="button" value="获取信息">
+		<div id="info">
+			<img src="../public/img/ajax-loader.gif" id="loading" style="display:none;"alt="">
+			<ul></ul>
+		</div>
+		<script>
+		$('input.btnJson').click(function(){
+			var uls=$('#info>ul');
+			$.ajax({
+				url:'../api/ajax-json.php?'+Math.random(),
+				type:'get',
+				success:function(data){
+					var result=eval(data);
+					// alert(typeof res);
+					for(var i=0;i<result.length;i++){
+						uls.append('<li>'+result[i].title+'<em>'+result[i].punlicTime+'</em></li>');
+					}
+				}
+			});
+			$(document).ajaxStart(function(){
+				$('img#loading').show();
+			});
+			// $(document).ajaxStop(function(){
+			// 	$('img#loading').hide();
+			// });
+		})
+		</script>
+	</body>
+</html>

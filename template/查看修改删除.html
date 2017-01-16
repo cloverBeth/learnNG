@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0" >
+	<link rel="stylesheet" href="../public/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+
+	<script src="../public/jquery/jquery-3.1.0.min.js"></script>
+	<script src="../public/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+	<style>
+	  .popbox{
+			width: 300px;
+			background: #fff;
+			position: absolute;
+			z-index:5;
+			left: 20%;
+			padding: 5px;
+		}
+		
+	  .closer{ 
+	  		display: inline-block; 
+	  		width: 20px;
+	  		height:5px; 
+	  		background: red;
+	  		line-height: 0;
+	  		font-size:0;
+	  		vertical-align: middle;
+	  		-webkit-transform: rotate(45deg);
+	  	}
+      .closer:before{
+      		content:'';
+      		display:block;
+      		width: 20px;
+      		height:5px; 
+      		background: red;
+      		-webkit-transform: rotate(-90deg);
+      	}
+
+	</style>
+	<title>查看修改删除</title>
+</head>
+<body>
+<div class="input-group">
+  <input type="text" name="" class="form-control inputs">
+  <span class="input-group-btn">       
+    	<input type="button" class="btn btn-block col-xs-4" value="搜索">
+  </span>
+</div>
+<table class="table" id='table'>
+	<tr>
+		<th>姓名</th>
+		<th>工资</th>
+		<th>操作</th>
+	</tr>
+	<tr>
+		<th>张三</th>
+		<th>8000</th>
+		<th>
+			<a class="view" href="#">查看</a>
+			<a class="delete" href="#">删除</a>
+			<a href="#">修改</a>
+		</th>
+	</tr>
+	<tr>
+		<th>李四</th>
+		<th>9000</th>
+		<th>
+			<a class="view" href="#">查看</a>
+			<a class="delete" href="#">删除</a>
+			<a href="#">修改</a>
+		</th>
+	</tr>
+	<tr>
+		<th>王五</th>
+		<th>12000</th>
+		<th>
+			<a class="view" href="#">查看</a>
+			<a class="delete" href="#">删除</a>
+			<a href="#">修改</a>
+		</th>
+	</tr>
+</table>
+
+<div class="popbox hidden">
+	<p>姓名:<strong></strong></p>
+	<p>工资:<strong></strong></p>
+	<a class="closer"></a>
+</div>
+
+
+<div class="form-group">
+	<textarea name="article" id="article" cols="30" rows="10" class="form-control"></textarea>
+	<span>你还可以输入
+		<font color="#ff0000">
+			<strong class="amount">80</strong>
+		</font>个字
+	</span>
+</div>
+<script>
+$(document).ready(function(){
+	var maskHeight=$(document).height();
+	var maskWidth=$(document).width();
+
+	//查看功能
+	$(".view").click(function(){
+		//创建遮罩层
+		$('<div class="mask"></div>').appendTo($('body'));
+		$('div.mask').css({
+			'opacity':0.4,
+			'background':'#000',
+			'position':'absolute',
+			'left':0,
+			'top':0,
+			'width':maskWidth,
+			'height':maskHeight,
+			'z-index':2
+		});
+
+		var arr=[];		
+		$(this).parent().siblings().each(function(){
+			//每次点击的时候将本组数据push给数组arr
+			arr.push($(this).text());
+		});
+		//将本组的数据显示在.popbox的strong标签里
+		$('.popbox').removeClass('hidden').children().each(function(i){
+			$(this).children('strong').text(arr[i]);
+		});
+		// 关闭显示框
+		$('.closer').click(function(){
+			$(this).parent().addClass('hidden');
+			$('div.mask').remove();
+		});
+
+	});
+
+	//删除功能
+	$('a.delete').click(function(){
+		$(this).parent().parent().remove();
+	});
+
+	// 筛选功能
+	$('input.btn-block').click(function(){
+		var inputs=$('.inputs').val();
+		$('table tr:not(":first")').hide().filter(':contains("'+inputs+'")').show();
+	});
+	// 文章字数限制功能
+	var maxlength=80;
+	$("#article").keyup(function(){
+		var len=$(this).val().length;
+		$('strong.amount').text(maxlength-len);
+		if(parseInt($('strong.amount').text())<0){
+			$('strong.amount').text('0');
+			$(this).val($(this).val().substring(0,maxlength+1));
+		}
+
+	});
+
+})
+</script>
+
+
+</body>
+</html>
